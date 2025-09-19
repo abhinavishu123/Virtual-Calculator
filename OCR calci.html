@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visual Calculator - Calculate from Images</title>
+    <link rel="stylesheet" href="ocr-calci.css">
+</head>
+<body>
+    <div class="calculator-container">
+        <div class="header">
+            <h1>Visual Calculator</h1>
+            <p>Upload an image with math expressions or use the calculator</p>
+        </div>
+        
+        <div class="calculator-body">
+            <div class="display" id="display">0</div>
+            
+            <div class="image-upload-area" id="uploadArea">
+                <div class="upload-icon">📷</div>
+                <div class="upload-text">Drop an image here or click to upload</div>
+                <div class="upload-subtext">Supports JPG, PNG, GIF</div>
+                <input type="file" id="imageInput" accept="image/*">
+            </div>
+            
+            <img class="image-preview" id="imagePreview" alt="Uploaded image">
+            
+            <div class="extracted-text" id="extractedText">
+                <h3>Detected Expression:</h3>
+                <div id="detectedExpression"></div>
+            </div>
+            
+            <button class="process-button" id="processButton">Calculate from Image</button>
+            
+            <div class="loading" id="loading">
+                <div class="loading-spinner"></div>
+                <p style="margin-top: 10px; color: #718096;">Processing image...</p>
+            </div>
+            
+            <div class="error-message" id="errorMessage"></div>
+            
+            <div class="button-grid">
+                <button class="calc-button clear" onclick="clearDisplay()">C</button>
+                <button class="calc-button operator" onclick="appendToDisplay('/')">/</button>
+                <button class="calc-button operator" onclick="appendToDisplay('*')">×</button>
+                <button class="calc-button operator" onclick="deleteLast()">←</button>
+                
+                <button class="calc-button" onclick="appendToDisplay('7')">7</button>
+                <button class="calc-button" onclick="appendToDisplay('8')">8</button>
+                <button class="calc-button" onclick="appendToDisplay('9')">9</button>
+                <button class="calc-button operator" onclick="appendToDisplay('-')">-</button>
+                
+                <button class="calc-button" onclick="appendToDisplay('4')">4</button>
+                <button class="calc-button" onclick="appendToDisplay('5')">5</button>
+                <button class="calc-button" onclick="appendToDisplay('6')">6</button>
+                <button class="calc-button operator" onclick="appendToDisplay('+')">+</button>
+                
+                <button class="calc-button" onclick="appendToDisplay('1')">1</button>
+                <button class="calc-button" onclick="appendToDisplay('2')">2</button>
+                <button class="calc-button" onclick="appendToDisplay('3')">3</button>
+                <button class="calc-button operator" onclick="appendToDisplay('.')">.</button>
+                
+                <button class="calc-button" onclick="appendToDisplay('0')">0</button>
+                <button class="calc-button operator" onclick="appendToDisplay('(')">(</button>
+                <button class="calc-button operator" onclick="appendToDisplay(')')">)</button>
+                <button class="calc-button equals" onclick="calculate()">=</button>
+            </div>
+            
+            <div class="history" id="history">
+                <h3>History</h3>
+                <div id="historyList"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@4/dist/tesseract.min.js"></script>
+    <script src="ocr-calci.js"></script>
+</body>
+</html>
